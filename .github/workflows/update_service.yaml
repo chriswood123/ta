@@ -33,3 +33,23 @@ jobs:
           docker tag hello:$(git rev-parse --short HEAD) \
           303981612052.dkr.ecr.eu-west-1.amazonaws.com/hello:$(git rev-parse --short HEAD)
           docker push 303981612052.dkr.ecr.eu-west-1.amazonaws.com/hello:$(git rev-parse --short HEAD)
+
+  update-service:
+    name: Update ECS service
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.2
+
+      - name: Terraform Apply
+        run: |
+          cd terraform
+          terraform init
+          terraform apply -var task_image_tag=$(git rev-parse --short HEAD) -auto-approve

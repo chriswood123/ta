@@ -5,7 +5,7 @@ module "ecs_cluster" {
 module "hello_service" {
   source = "./modules/hello-service"
 
-  task_image_tag  = "1"
+  task_image_tag  = var.task_image_tag
   ecs_cluster     = module.ecs_cluster.cluster_arn
   service_subnets = data.aws_subnets.private_subnets.ids
   vpc_id          = data.aws_vpc.default_vpc.id
