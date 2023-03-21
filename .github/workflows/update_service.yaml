@@ -2,7 +2,7 @@ name: Build and Update Service
 
 on:
   push:
-    branches: [master,action]
+    branches: [master]
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
