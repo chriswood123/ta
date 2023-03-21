@@ -1,0 +1,5 @@
+name: Build and Update Service
+
+on:
+  push:
+    branches: [master]
